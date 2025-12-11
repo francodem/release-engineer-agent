@@ -1,20 +1,5 @@
-System Design
-=============
-
-This section aggregates the internal design documents for each component of the
-Release Engineer Agent. Each subpage dives into architecture, responsibilities,
-data flows, and key interfaces for a specific module.
-
-Components
-----------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Alerts & Ingestion
-
-   alerts_injestor
-System Design
-==============
+AlertsInjestor System Design
+============================
 
 This section describes the architecture and internal design of the **AlertsInjestor** 
 component of the Release Engineer Agent. This module is responsible for ingesting, 
