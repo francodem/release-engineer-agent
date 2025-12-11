@@ -17,12 +17,32 @@ class AlertProcessor(IAlertProcessor):
         enricher: IEnricher,
         repository: IAlertsRepository,
     ) -> None:
+        """
+        Initialize the AlertProcessor with its pipeline dependencies.
+        
+        Parameters:
+            sanitizer: Component that sanitizes incoming raw alerts before validation.
+            validator: Component that verifies alert validity and produces validation results.
+            enricher: Component that enriches validated alerts with additional data.
+            repository: Component that persists processed alerts.
+        """
         self._sanitizer = sanitizer
         self._validator = validator
         self._enricher = enricher
         self._repository = repository
 
     def process(self, raw: RawAlert) -> ProcessedAlert:
+        """
+        Run a sanitize → validate → enrich → persist pipeline for a raw alert.
+        
+        Sanitizes the input, validates the sanitized result, enriches the validated data, and persists a ProcessedAlert. Invalid alerts are still enriched and saved with status "invalid" for auditing; valid alerts are saved with status "processed".
+        
+        Parameters:
+            raw (RawAlert): The incoming raw alert to process.
+        
+        Returns:
+            ProcessedAlert: The persisted processed alert containing a generated `alert_id`, `status` ("invalid" or "processed"), the enriched `payload`, and the `received_at` UTC timestamp.
+        """
         sanitized = self._sanitizer.sanitize(raw)
         validated = self._validator.validate(sanitized)
 
@@ -47,4 +67,3 @@ class AlertProcessor(IAlertProcessor):
         )
         self._repository.save(processed)
         return processed
-
