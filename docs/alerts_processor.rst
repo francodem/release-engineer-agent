@@ -1,14 +1,14 @@
-AlertsInjestor System Design
-============================
+Alerts Processor System Design
+==============================
 
-This section describes the architecture and internal design of the **AlertsInjestor** 
+This section describes the architecture and internal design of the **Alerts Processor** 
 component of the Release Engineer Agent. This module is responsible for ingesting, 
 validating, enriching, and persisting alert data originating from Prometheus Alertmanager.
 
 Architecture Overview
 ---------------------
 
-The AlertsInjestor follows a clean, modular, SOLID-oriented architecture. It acts as the 
+The Alerts Processor follows a clean, modular, SOLID-oriented architecture. It acts as the 
 entry point for all alert events sent through Alertmanager's webhook pipeline.
 
 The component is designed to efficiently handle **thousands of alerts per minute** by using 
@@ -58,16 +58,16 @@ Core Components
 UML Diagram
 -----------
 
-The following UML diagram illustrates the AlertsInjestor's class model, interfaces, and 
+The following UML diagram illustrates the Alerts Processor's class model, interfaces, and 
 dependencies. The design adheres to SOLID principles by separating responsibilities across 
 distinct components and relying on interface-driven interactions.
 
-.. figure:: _static/images/rea-alertsinjestor-uml-diagram.png
-   :alt: AlertsInjestor UML Diagram
+.. figure:: _static/images/rea-alertsprocessor-uml-diagram.svg
+   :alt: Alerts Processor UML Diagram
    :align: center
    :width: 100%
 
-   UML class diagram for the AlertsInjestor component
+   UML class diagram for the Alerts Processor component
 
 Data Flow
 ---------
@@ -115,7 +115,7 @@ Technology Stack
 Deployment Architecture
 -----------------------
 
-The AlertsInjestor can be deployed as:
+The Alerts Processor can be deployed as:
 
 * **Standalone Service**  
   Runs independently in a Kubernetes Deployment and exposes an HTTP Service for Alertmanager.
